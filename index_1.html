@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Friuli Venezia Giulia — Language Diversity Explorer</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #F5F0E8;
+  --ink: #1A1A1A;
+  --terracotta: #C45A3C;
+  --sea: #2B6B8A;
+  --gold: #D4A843;
+  --sage: #6B8F71;
+  --slate: #4A5568;
+  --light-slate: #A0AEC0;
+  --card-bg: #FFFFFFEE;
+  --friulian: #C45A3C;
+  --slovenian: #2B6B8A;
+  --german: #D4A843;
+  --venetian: #8B5E3C;
+  --italian: #6B8F71;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+/* ---- HERO ---- */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  position: relative;
+  background: linear-gradient(135deg, #1A1A1A 0%, #2d3748 50%, #1a365d 100%);
+  color: #fff;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 50%, rgba(196,90,60,0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 30%, rgba(43,107,138,0.15) 0%, transparent 50%),
+    radial-gradient(circle at 50% 80%, rgba(212,168,67,0.1) 0%, transparent 50%);
+}
+
+.hero-content { position: relative; z-index: 1; max-width: 800px; }
+
+.hero h1 {
+  font-family: 'EB Garamond', serif;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.hero h1 span {
+  display: block;
+  font-size: 0.45em;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.8rem;
+}
+
+.hero-sub {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  color: #cbd5e0;
+  max-width: 600px;
+  margin: 1.5rem auto 2.5rem;
+  line-height: 1.6;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+}
+
+.hero-stat {
+  text-align: center;
+}
+
+.hero-stat .num {
+  font-family: 'EB Garamond', serif;
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.hero-stat .label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #a0aec0;
+}
+
+.scroll-cue {
+  animation: bobble 2s ease-in-out infinite;
+  font-size: 0.85rem;
+  color: #a0aec0;
+  cursor: pointer;
+}
+
+.scroll-cue svg { display: block; margin: 0.5rem auto 0; }
+
+@keyframes bobble {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+/* ---- SECTION WRAPPER ---- */
+.section {
+  padding: 5rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-family: 'EB Garamond', serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.section-sub {
+  text-align: center;
+  color: var(--slate);
+  max-width: 650px;
+  margin: 0 auto 3rem;
+  line-height: 1.6;
+}
+
+/* ---- SIDE BY SIDE MAPS ---- */
+.maps-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  .maps-wrapper { grid-template-columns: 1fr; }
+}
+
+.map-card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+.map-card-header {
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.map-card-header .flag { font-size: 1.5rem; }
+
+.map-card-header h3 {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.map-card-header .area {
+  margin-left: auto;
+  font-size: 0.8rem;
+  color: var(--slate);
+  background: rgba(0,0,0,0.04);
+  padding: 0.25rem 0.75rem;
+  border-radius: 99px;
+}
+
+.map-svg-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  cursor: default;
+}
+
+.map-svg-container svg { width: 100%; height: 100%; }
+
+/* ---- LANGUAGE PINS ---- */
+.lang-pin {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.lang-pin:hover { transform: scale(1.25); }
+
+/* ---- TOOLTIP ---- */
+.tooltip {
+  position: fixed;
+  background: var(--ink);
+  color: #fff;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  max-width: 260px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+  z-index: 100;
+  line-height: 1.5;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+}
+
+.tooltip.show { opacity: 1; }
+
+.tooltip .tt-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 0.2rem;
+}
+
+.tooltip .tt-family {
+  color: var(--gold);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.4rem;
+}
+
+/* ---- DISTANCE COMPARISON ---- */
+.distance-section {
+  background: var(--ink);
+  color: #fff;
+  padding: 5rem 2rem;
+}
+
+.distance-section .section-title { color: #fff; }
+.distance-section .section-sub { color: #a0aec0; }
+
+.distance-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.distance-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 14px;
+  padding: 1.5rem;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.distance-card:hover {
+  transform: translateY(-4px);
+  background: rgba(255,255,255,0.1);
+}
+
+.distance-card .route {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.distance-card .km {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--gold);
+  font-family: 'EB Garamond', serif;
+}
+
+.distance-card .km small {
+  font-size: 0.5em;
+  color: #a0aec0;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.distance-card .equiv {
+  font-size: 0.85rem;
+  color: #a0aec0;
+  margin-top: 0.5rem;
+  line-height: 1.5;
+}
+
+.distance-card .equiv strong { color: #fff; }
+
+.distance-card .lang-change {
+  margin-top: 0.75rem;
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.lang-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 99px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.lang-tag.friulian { background: var(--friulian); color: #fff; }
+.lang-tag.slovenian { background: var(--slovenian); color: #fff; }
+.lang-tag.german { background: var(--german); color: var(--ink); }
+.lang-tag.venetian { background: var(--venetian); color: #fff; }
+.lang-tag.italian { background: var(--italian); color: #fff; }
+
+/* ---- LANGUAGE CARDS ---- */
+.lang-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.lang-card {
+  background: var(--card-bg);
+  border-radius: 14px;
+  padding: 1.75rem;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.05);
+  border: 1px solid rgba(0,0,0,0.05);
+  border-top: 4px solid var(--terracotta);
+  transition: transform 0.2s;
+}
+
+.lang-card:hover { transform: translateY(-3px); }
+
+.lang-card[data-family="romance"] { border-top-color: var(--terracotta); }
+.lang-card[data-family="slavic"] { border-top-color: var(--sea); }
+.lang-card[data-family="germanic"] { border-top-color: var(--gold); }
+
+.lang-card h4 {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.lang-card .family-tag {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.75rem;
+  display: inline-block;
+}
+
+.lang-card[data-family="romance"] .family-tag { color: var(--terracotta); }
+.lang-card[data-family="slavic"] .family-tag { color: var(--sea); }
+.lang-card[data-family="germanic"] .family-tag { color: var(--gold); }
+
+.lang-card .speakers {
+  font-size: 0.85rem;
+  color: var(--slate);
+  margin-bottom: 0.6rem;
+}
+
+.lang-card p {
+  font-size: 0.9rem;
+  color: var(--slate);
+  line-height: 1.6;
+}
+
+.lang-card .example {
+  margin-top: 0.75rem;
+  background: rgba(0,0,0,0.03);
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--ink);
+}
+
+.lang-card .example .translation {
+  display: block;
+  font-family: 'DM Sans', sans-serif;
+  font-style: normal;
+  font-size: 0.75rem;
+  color: var(--slate);
+  margin-top: 0.3rem;
+}
+
+/* ---- BOTTOM TAKEAWAY ---- */
+.takeaway {
+  text-align: center;
+  padding: 5rem 2rem;
+  background: linear-gradient(135deg, #1a365d 0%, #2d3748 100%);
+  color: #fff;
+}
+
+.takeaway h2 {
+  font-family: 'EB Garamond', serif;
+  font-size: clamp(1.6rem, 4vw, 2.5rem);
+  max-width: 700px;
+  margin: 0 auto 1.5rem;
+  line-height: 1.3;
+}
+
+.takeaway p {
+  color: #cbd5e0;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.7;
+  font-size: 1.05rem;
+}
+
+/* ---- LEGEND ---- */
+.legend {
+  display: flex;
+  gap: 1.25rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--slate);
+}
+
+.legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+/* ---- INDIANA LABEL ---- */
+.in-label {
+  font-size: 0.65rem;
+  fill: var(--slate);
+  font-family: 'DM Sans', sans-serif;
+  text-anchor: middle;
+}
+
+/* ---- FOOTER ---- */
+footer {
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.75rem;
+  color: var(--light-slate);
+  border-top: 1px solid rgba(0,0,0,0.06);
+}
+
+footer a { color: var(--sea); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<!-- TOOLTIP -->
+<div class="tooltip" id="tooltip">
+  <div class="tt-name"></div>
+  <div class="tt-family"></div>
+  <div class="tt-desc"></div>
+</div>
+
+<!-- ======= HERO ======= -->
+<section class="hero" id="hero">
+  <div class="hero-content">
+    <h1>
+      <span>Language Diversity in</span>
+      Friuli Venezia Giulia
+    </h1>
+    <p class="hero-sub">
+      A region the size of central Indiana — with more linguistic diversity than most European countries.
+      Explore how languages shift every few miles, using familiar Hoosier distances for scale.
+    </p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="num">12+</div>
+        <div class="label">Languages & Dialects</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">~3,060</div>
+        <div class="label">sq mi (≈ Indiana's 6th)</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">1.2M</div>
+        <div class="label">People</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">3</div>
+        <div class="label">Language Families</div>
+      </div>
+    </div>
+    <div class="scroll-cue" onclick="document.getElementById('maps').scrollIntoView({behavior:'smooth'})">
+      Scroll to explore
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+  </div>
+</section>
+
+<!-- ======= SIDE-BY-SIDE MAPS ======= -->
+<section class="section" id="maps">
+  <h2 class="section-title">Two Regions, Side by Side</h2>
+  <p class="section-sub">
+    Friuli Venezia Giulia is roughly the same area as central Indiana — from Bloomington to Indy to Terre Haute.
+    But while Hoosiers share English, FVG packs 12+ distinct languages into that same footprint.
+  </p>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--friulian)"></div> Friulian / Rhaeto-Romance</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--venetian)"></div> Venetian dialects</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--slovenian)"></div> Slavic / Slovenian</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--german)"></div> Germanic</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--italian)"></div> Standard Italian</div>
+  </div>
+
+  <div class="maps-wrapper">
+
+    <!-- FVG MAP -->
+    <div class="map-card">
+      <div class="map-card-header">
+        <span class="flag">🇮🇹</span>
+        <h3>Friuli Venezia Giulia</h3>
+        <span class="area">~7,858 km²</span>
+      </div>
+      <div class="map-svg-container">
+        <svg viewBox="0 0 500 375" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="fvgFill" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#e8ddd0"/>
+              <stop offset="100%" stop-color="#dcd3c4"/>
+            </linearGradient>
+            <filter id="shadow1" x="-5%" y="-5%" width="110%" height="110%">
+              <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.1"/>
+            </filter>
+          </defs>
+          <!-- Background land tint -->
+          <rect width="500" height="375" fill="#e2e0d8" rx="0"/>
+          <!-- Adriatic Sea (south) -->
+          <path d="M0,300 Q120,320 250,345 Q380,365 500,350 L500,375 L0,375 Z" fill="#d4e1ea" opacity="0.7"/>
+          <text x="180" y="365" fill="#a0b8cc" font-size="10" font-family="EB Garamond, serif" font-style="italic" text-anchor="middle">Adriatic Sea</text>
+          <!-- Slovenia shading -->
+          <rect x="462" y="0" width="38" height="375" fill="#d8ddd4" opacity="0.4"/>
+
+          <!-- REAL FVG BOUNDARY (from geographic lat/lng conversion) -->
+          <polygon
+            points="96.7,347.5 125.1,344.3 167.7,341.2 210.2,322.4 252.8,328.6 275.6,316.1 295.4,322.4 323.8,316.1 360.7,322.4 380.6,328.6 400.5,341.2 423.2,344.3 437.4,338.0 445.9,322.4 457.3,316.1 460.1,297.3 457.3,275.3 445.9,259.6 428.9,244.0 409.0,228.3 400.5,212.6 389.1,196.9 380.6,181.2 372.1,165.5 380.6,159.3 394.8,140.5 400.5,127.9 394.8,118.5 380.6,109.1 372.1,102.8 380.6,96.5 394.8,87.1 400.5,77.7 394.8,71.5 389.1,65.2 380.6,55.8 366.4,46.4 352.2,40.1 332.3,33.8 309.6,40.1 286.9,46.4 267.0,33.8 247.2,40.1 224.4,46.4 201.7,40.1 181.9,33.8 162.0,40.1 139.3,46.4 125.1,55.8 110.9,65.2 88.1,71.5 68.3,77.7 59.8,87.1 54.1,102.8 48.4,118.5 39.9,140.5 31.4,159.3 48.4,171.8 59.8,181.2 76.8,196.9 82.5,212.6 88.1,228.3 82.5,244.0 76.8,259.6 82.5,275.3 88.1,291.0 82.5,306.7 88.1,322.4 91.0,338.0 96.7,347.5"
+            fill="url(#fvgFill)" stroke="#b8a890" stroke-width="1.5" filter="url(#shadow1)"/>
+
+          <!-- Province borders (subtle dashed) -->
+          <line x1="162" y1="40" x2="200" y2="330" stroke="#c4b8a8" stroke-width="0.6" stroke-dasharray="4,3" opacity="0.35"/>
+          <line x1="372" y1="103" x2="400" y2="340" stroke="#c4b8a8" stroke-width="0.6" stroke-dasharray="4,3" opacity="0.35"/>
+          <line x1="425" y1="250" x2="445" y2="340" stroke="#c4b8a8" stroke-width="0.5" stroke-dasharray="3,3" opacity="0.3"/>
+
+          <!-- Province labels -->
+          <text x="118" y="228" fill="#8a7e70" font-size="9" font-family="DM Sans" text-anchor="middle" opacity="0.45">PORDENONE</text>
+          <text x="268" y="198" fill="#8a7e70" font-size="10" font-family="DM Sans" text-anchor="middle" opacity="0.45">UDINE</text>
+          <text x="398" y="268" fill="#8a7e70" font-size="8" font-family="DM Sans" text-anchor="middle" opacity="0.45">GORIZIA</text>
+          <text x="448" y="304" fill="#8a7e70" font-size="7.5" font-family="DM Sans" text-anchor="middle" opacity="0.45">TRIESTE</text>
+
+          <!-- Border labels -->
+          <text x="250" y="22" fill="#8a7e70" font-size="9" font-family="EB Garamond, serif" font-style="italic" text-anchor="middle" opacity="0.4">— Austria —</text>
+          <text x="476" y="185" fill="#8a7e70" font-size="8" font-family="DM Sans" text-anchor="middle" opacity="0.3" transform="rotate(90,476,185)">Slovenia</text>
+          <text x="22" y="205" fill="#8a7e70" font-size="8" font-family="DM Sans" text-anchor="middle" opacity="0.3" transform="rotate(-90,22,205)">Veneto</text>
+
+          <!-- City dots (non-interactive context) -->
+          <circle cx="291" cy="206" r="2.5" fill="#8a7e70" opacity="0.3"/>
+          <text x="291" y="220" fill="#8a7e70" font-size="7.5" font-family="DM Sans" text-anchor="middle" opacity="0.45">Udine</text>
+          <circle cx="445" cy="338" r="2.5" fill="#8a7e70" opacity="0.3"/>
+          <text x="437" y="352" fill="#8a7e70" font-size="7.5" font-family="DM Sans" text-anchor="middle" opacity="0.45">Trieste</text>
+          <circle cx="127" cy="242" r="2" fill="#8a7e70" opacity="0.25"/>
+          <text x="127" y="256" fill="#8a7e70" font-size="6.5" font-family="DM Sans" text-anchor="middle" opacity="0.4">Pordenone</text>
+          <circle cx="401" cy="247" r="2" fill="#8a7e70" opacity="0.25"/>
+          <text x="397" y="241" fill="#8a7e70" font-size="6.5" font-family="DM Sans" text-anchor="middle" opacity="0.4">Gorizia</text>
+          <circle cx="347" cy="199" r="1.5" fill="#8a7e70" opacity="0.2"/>
+          <text x="347" y="194" fill="#8a7e70" font-size="6" font-family="DM Sans" text-anchor="middle" opacity="0.35">Cividale</text>
+          <circle cx="228" cy="101" r="1.5" fill="#8a7e70" opacity="0.2"/>
+          <text x="228" y="96" fill="#8a7e70" font-size="6" font-family="DM Sans" text-anchor="middle" opacity="0.35">Tolmezzo</text>
+          <circle cx="390" cy="70" r="1.5" fill="#8a7e70" opacity="0.2"/>
+          <text x="390" y="64" fill="#8a7e70" font-size="6" font-family="DM Sans" text-anchor="middle" opacity="0.35">Tarvisio</text>
+
+          <!-- ====== LANGUAGE PINS (geo-located from real lat/lng) ====== -->
+          <!-- Friulian varieties -->
+          <g class="lang-pin" data-lang="Central Friulian" data-family="Rhaeto-Romance" data-desc="The main variety, centered around Udine. ~420,000 regular speakers. Basis for the literary koiné standardized in 1996." data-example="Cemût staiso? — How are you?">
+            <circle cx="290" cy="206" r="8" fill="var(--friulian)" opacity="0.9"/><circle cx="290" cy="206" r="3" fill="#fff"/>
+          </g>
+          <g class="lang-pin" data-lang="Western Friulian" data-family="Rhaeto-Romance" data-desc="Spoken around Pordenone. Shows stronger Venetian influence than the central variety." data-example="Cement statu? — How are you?">
+            <circle cx="128" cy="241" r="7" fill="var(--friulian)" opacity="0.8"/><circle cx="128" cy="241" r="2.5" fill="#fff"/>
+          </g>
+          <g class="lang-pin" data-lang="Carnic Friulian" data-family="Rhaeto-Romance" data-desc="Mountain variety spoken in Carnia (upper Tagliamento). More archaic features preserved due to Alpine isolation." data-example="Cjmût stâstu? — How are you?">
+            <circle cx="227" cy="103" r="7" fill="var(--friulian)" opacity="0.8"/><circle cx="227" cy="103" r="2.5" fill="#fff"/>
+          </g>
+          <g class="lang-pin" data-lang="Eastern Friulian" data-family="Rhaeto-Romance" data-desc="Spoken around Gorizia. Influenced by Slovenian contact. Distinct phonology from central varieties." data-example="Cemùt stâstu? — How are you?">
+            <circle cx="366" cy="247" r="7" fill="var(--friulian)" opacity="0.8"/><circle cx="366" cy="247" r="2.5" fill="#fff"/>
+          </g>
+
+          <!-- Slovenian varieties -->
+          <g class="lang-pin" data-lang="Slovenian (Gorizia/Trieste)" data-family="Slavic" data-desc="Spoken in Collio hills and across the Karst into Trieste. ~50,000 speakers in FVG. Protected by national law." data-example="Kako se imate? — How are you?">
+            <circle cx="423" cy="266" r="8" fill="var(--slovenian)" opacity="0.9"/><circle cx="423" cy="266" r="3" fill="#fff"/>
+          </g>
+          <g class="lang-pin" data-lang="Resian (Resiano)" data-family="Slavic" data-desc="An archaic Slovenian dialect in Val Resia, so distinct some linguists once classified it separately. ~1,000 speakers. UNESCO endangered." data-example="Kako se mate? — How are you?">
+            <circle cx="313" cy="109" r="7" fill="var(--slovenian)" opacity="0.85"/><circle cx="313" cy="109" r="2.5" fill="#fff"/>
+          </g>
+          <g class="lang-pin" data-lang="Natisone Valley Slovenian" data-family="Slavic" data-desc="Dialects of the Valli del Natisone east of Cividale. Distinct from standard Slovenian, with Friulian admixture." data-example="Kakuo se imáte?">
+            <circle cx="361" cy="181" r="6" fill="var(--slovenian)" opacity="0.8"/><circle cx="361" cy="181" r="2" fill="#fff"/>
+          </g>
+          <g class="lang-pin" data-lang="Torre Valley Slovenian" data-family="Slavic" data-desc="Upper Torre Valley dialect north of Tarcento. Another archaic Slovenian variety with unique features." data-example="">
+            <circle cx="338" cy="150" r="6" fill="var(--slovenian)" opacity="0.75"/><circle cx="338" cy="150" r="2" fill="#fff"/>
+          </g>
+
+          <!-- Germanic language islands -->
+          <g class="lang-pin" data-lang="Saurano (Zahrar Sproche)" data-family="Germanic" data-desc="Medieval South Bavarian dialect in Sauris (1,300m). ~200 speakers. Settled by Tyrolean colonists in the 1200s. Trilingual community." data-example="Bia geat's? — How's it going?">
+            <circle cx="142" cy="84" r="7" fill="var(--german)" opacity="0.9"/><circle cx="142" cy="84" r="2.5" fill="#fff"/>
+          </g>
+          <g class="lang-pin" data-lang="Timavese (Tsjmbrischt)" data-family="Germanic" data-desc="South Bavarian dialect of Timau/Tischelwang. ~400 speakers. German vocabulary diverges from Saurano." data-example="Bia geat's dir? — How are you?">
+            <circle cx="230" cy="56" r="6" fill="var(--german)" opacity="0.85"/><circle cx="230" cy="56" r="2" fill="#fff"/>
+          </g>
+          <g class="lang-pin" data-lang="Plodarisch (Sappada)" data-family="Germanic" data-desc="South Bavarian dialect of Sappada/Plodn. ~1,300 residents. Uses German-modeled neologisms unlike neighbors." data-example="Bia geat's? — How's it going?">
+            <circle cx="136" cy="50" r="6" fill="var(--german)" opacity="0.85"/><circle cx="136" cy="50" r="2" fill="#fff"/>
+          </g>
+          <g class="lang-pin" data-lang="Carinthian German (Val Canale)" data-family="Germanic" data-desc="Carinthian dialect in Tarvisio and Pontebba, near Austrian border. ~5,000 speakers. Former Habsburg territory." data-example="Wia geht's? — How's it going?">
+            <circle cx="389" cy="68" r="7" fill="var(--german)" opacity="0.9"/><circle cx="389" cy="68" r="2.5" fill="#fff"/>
+          </g>
+
+          <!-- Venetian dialects -->
+          <g class="lang-pin" data-lang="Triestine (Triestin)" data-family="Venetian" data-desc="Venetian-based dialect with German, Slovenian, and Greek loanwords. Replaced the extinct Tergestine by the 1800s." data-example="Come xe? — How are you?">
+            <circle cx="446" cy="338" r="8" fill="var(--venetian)" opacity="0.9"/><circle cx="446" cy="338" r="3" fill="#fff"/>
+          </g>
+          <g class="lang-pin" data-lang="Bisiacco" data-family="Venetian" data-desc="Venetian dialect of Monfalcone/Bisiacaria. Influenced by Friulian substrate. Distinct from both Triestine and mainland Venetian." data-example="Come xétu? — How are you?">
+            <circle cx="375" cy="294" r="6" fill="var(--venetian)" opacity="0.8"/><circle cx="375" cy="294" r="2" fill="#fff"/>
+          </g>
+          <g class="lang-pin" data-lang="Gradese" data-family="Venetian" data-desc="Venetian dialect of Grado lagoon. Historic link to Venice and Aquileia rather than Friulian hinterland." data-example="Come xétu? — How are you?">
+            <circle cx="335" cy="329" r="6" fill="var(--venetian)" opacity="0.8"/><circle cx="335" cy="329" r="2" fill="#fff"/>
+          </g>
+          <g class="lang-pin" data-lang="Pordenonese Venetian" data-family="Venetian" data-desc="Venetian-influenced speech in western Pordenone, reflecting proximity to Veneto." data-example="">
+            <circle cx="83" cy="260" r="6" fill="var(--venetian)" opacity="0.75"/><circle cx="83" cy="260" r="2" fill="#fff"/>
+          </g>
+
+          <!-- Standard Italian -->
+          <g class="lang-pin" data-lang="Standard Italian" data-family="National Language" data-desc="The official language. Dominant in cities, schools, media, bureaucracy. Everyone speaks it, but many are bilingual or trilingual." data-example="Come stai? — How are you?">
+            <circle cx="253" cy="282" r="7" fill="var(--italian)" opacity="0.8"/><circle cx="253" cy="282" r="2.5" fill="#fff"/>
+          </g>
+
+          <!-- Scale bar -->
+          <line x1="15" y1="367" x2="95" y2="367" stroke="#8a7e70" stroke-width="1.5"/>
+          <line x1="15" y1="362" x2="15" y2="372" stroke="#8a7e70" stroke-width="1"/>
+          <line x1="95" y1="362" x2="95" y2="372" stroke="#8a7e70" stroke-width="1"/>
+          <text x="55" y="362" fill="#8a7e70" font-size="7.5" font-family="DM Sans" text-anchor="middle">~50 km / 31 mi</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- INDIANA MAP -->
+    <div class="map-card">
+      <div class="map-card-header">
+        <span class="flag">🇺🇸</span>
+        <h3>Central Indiana (same scale)</h3>
+        <span class="area">~7,900 km²</span>
+      </div>
+      <div class="map-svg-container">
+        <svg viewBox="0 0 500 375" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="inFill" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#dfe6d8"/>
+              <stop offset="100%" stop-color="#d4dbc9"/>
+            </linearGradient>
+          </defs>
+          <rect width="500" height="375" fill="#e8ebe4" rx="0"/>
+          <!-- Simplified central IN area -->
+          <rect x="60" y="30" width="380" height="310" rx="10" fill="url(#inFill)" stroke="#b8c4a8" stroke-width="1.5" filter="url(#shadow1)"/>
+
+          <!-- Roads -->
+          <line x1="250" y1="30" x2="250" y2="340" stroke="#c4cbb8" stroke-width="2" opacity="0.4"/>
+          <line x1="60" y1="185" x2="440" y2="185" stroke="#c4cbb8" stroke-width="2" opacity="0.4"/>
+          <!-- I-69 diagonal -->
+          <line x1="250" y1="90" x2="350" y2="340" stroke="#c4cbb8" stroke-width="1.5" opacity="0.3"/>
+
+          <!-- City markers -->
+          <!-- Indianapolis -->
+          <circle cx="280" cy="105" r="12" fill="var(--italian)" opacity="0.7"/>
+          <circle cx="280" cy="105" r="5" fill="#fff"/>
+          <text x="280" y="85" class="in-label" font-size="11" font-weight="600" fill="var(--ink)">Indianapolis</text>
+
+          <!-- Bloomington -->
+          <circle cx="230" cy="260" r="10" fill="var(--italian)" opacity="0.7"/>
+          <circle cx="230" cy="260" r="4" fill="#fff"/>
+          <text x="230" y="245" class="in-label" font-size="10" font-weight="600" fill="var(--ink)">Bloomington</text>
+
+          <!-- Terre Haute -->
+          <circle cx="100" cy="175" r="8" fill="var(--italian)" opacity="0.6"/>
+          <circle cx="100" cy="175" r="3" fill="#fff"/>
+          <text x="100" y="162" class="in-label" font-size="9" fill="var(--ink)">Terre Haute</text>
+
+          <!-- Columbus -->
+          <circle cx="330" cy="220" r="7" fill="var(--italian)" opacity="0.6"/>
+          <circle cx="330" cy="220" r="2.5" fill="#fff"/>
+          <text x="330" y="208" class="in-label" font-size="9" fill="var(--ink)">Columbus</text>
+
+          <!-- Martinsville -->
+          <circle cx="260" cy="185" r="6" fill="var(--italian)" opacity="0.5"/>
+          <circle cx="260" cy="185" r="2" fill="#fff"/>
+          <text x="260" y="175" class="in-label" font-size="8" fill="var(--ink)">Martinsville</text>
+
+          <!-- Greencastle -->
+          <circle cx="165" cy="165" r="6" fill="var(--italian)" opacity="0.5"/>
+          <circle cx="165" cy="165" r="2" fill="#fff"/>
+          <text x="165" y="155" class="in-label" font-size="8" fill="var(--ink)">Greencastle</text>
+
+          <!-- Nashville -->
+          <circle cx="290" cy="250" r="6" fill="var(--italian)" opacity="0.5"/>
+          <circle cx="290" cy="250" r="2" fill="#fff"/>
+          <text x="290" y="240" class="in-label" font-size="8" fill="var(--ink)">Nashville</text>
+
+          <!-- Spencer -->
+          <circle cx="185" cy="230" r="5" fill="var(--italian)" opacity="0.5"/>
+          <circle cx="185" cy="230" r="1.5" fill="#fff"/>
+          <text x="185" y="220" class="in-label" font-size="8" fill="var(--ink)">Spencer</text>
+
+          <!-- Big "ENGLISH" labels -->
+          <text x="250" y="135" fill="var(--italian)" font-size="20" font-family="EB Garamond, serif" font-weight="700" text-anchor="middle" opacity="0.2">English</text>
+          <text x="170" y="210" fill="var(--italian)" font-size="16" font-family="EB Garamond, serif" font-weight="700" text-anchor="middle" opacity="0.15">English</text>
+          <text x="340" y="275" fill="var(--italian)" font-size="14" font-family="EB Garamond, serif" font-weight="700" text-anchor="middle" opacity="0.12">English</text>
+          <text x="380" y="140" fill="var(--italian)" font-size="13" font-family="EB Garamond, serif" font-weight="700" text-anchor="middle" opacity="0.1">English</text>
+          <text x="130" cy="290" y="300" fill="var(--italian)" font-size="12" font-family="EB Garamond, serif" font-weight="700" text-anchor="middle" opacity="0.1">English</text>
+
+          <!-- Annotation -->
+          <text x="250" y="355" fill="#8a9a78" font-size="10" font-family="EB Garamond, serif" font-style="italic" text-anchor="middle">One language across the same area</text>
+
+          <!-- Scale bar -->
+          <line x1="30" y1="345" x2="110" y2="345" stroke="#8a9a78" stroke-width="1.5"/>
+          <line x1="30" y1="340" x2="30" y2="350" stroke="#8a9a78" stroke-width="1"/>
+          <line x1="110" y1="340" x2="110" y2="350" stroke="#8a9a78" stroke-width="1"/>
+          <text x="70" y="340" fill="#8a9a78" font-size="8" font-family="DM Sans" text-anchor="middle">~50 km / ~31 mi</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= DISTANCE COMPARISONS ======= -->
+<section class="distance-section">
+  <h2 class="section-title">Familiar Distances, Unfamiliar Diversity</h2>
+  <p class="section-sub">
+    Each of these FVG journeys is about the same distance as a Hoosier road trip you might know — but in FVG, you cross into an entirely different language.
+  </p>
+
+  <div class="distance-grid">
+    <div class="distance-card">
+      <div class="route">Udine → Trieste</div>
+      <div class="km">75 km <small>/ 47 mi</small></div>
+      <div class="equiv">≈ <strong>Bloomington → Indianapolis</strong></div>
+      <div class="equiv">Start in Friulian, end in Triestine (Venetian) — passing through Italian and Slovenian zones.</div>
+      <div class="lang-change">
+        <span class="lang-tag friulian">Friulian</span>
+        <span class="lang-tag italian">Italian</span>
+        <span class="lang-tag slovenian">Slovenian</span>
+        <span class="lang-tag venetian">Triestine</span>
+      </div>
+    </div>
+
+    <div class="distance-card">
+      <div class="route">Sauris → Tarvisio</div>
+      <div class="km">65 km <small>/ 40 mi</small></div>
+      <div class="equiv">≈ <strong>Bloomington → Columbus</strong></div>
+      <div class="equiv">From a medieval Bavarian village (200 speakers!) to a Carinthian German-speaking border town. Two distinct Germanic dialects.</div>
+      <div class="lang-change">
+        <span class="lang-tag german">Saurano</span>
+        <span class="lang-tag friulian">Carnic Friulian</span>
+        <span class="lang-tag german">Carinthian</span>
+      </div>
+    </div>
+
+    <div class="distance-card">
+      <div class="route">Trieste → Resia</div>
+      <div class="km">140 km <small>/ 87 mi</small></div>
+      <div class="equiv">≈ <strong>Bloomington → Terre Haute + back</strong></div>
+      <div class="equiv">From a Venetian-dialect port city to a valley where an archaic Slovenian so distinct it was once thought to be a separate language.</div>
+      <div class="lang-change">
+        <span class="lang-tag venetian">Triestine</span>
+        <span class="lang-tag italian">Italian</span>
+        <span class="lang-tag friulian">Friulian</span>
+        <span class="lang-tag slovenian">Resian</span>
+      </div>
+    </div>
+
+    <div class="distance-card">
+      <div class="route">Pordenone → Grado</div>
+      <div class="km">90 km <small>/ 56 mi</small></div>
+      <div class="equiv">≈ <strong>Bloomington → Greencastle → Terre Haute</strong></div>
+      <div class="equiv">From Venetian-influenced western Friuli to the Adriatic lagoon, where Gradese (a Venetian dialect) links back to old Venice, not Friuli.</div>
+      <div class="lang-change">
+        <span class="lang-tag venetian">Pordenonese</span>
+        <span class="lang-tag friulian">W. Friulian</span>
+        <span class="lang-tag friulian">C. Friulian</span>
+        <span class="lang-tag venetian">Gradese</span>
+      </div>
+    </div>
+
+    <div class="distance-card">
+      <div class="route">Sappada → Sauris → Timau</div>
+      <div class="km">~50 km <small>/ 31 mi total</small></div>
+      <div class="equiv">≈ <strong>Bloomington → Nashville → Columbus</strong></div>
+      <div class="equiv">Three tiny German "language islands" — each with its own medieval Bavarian dialect, surrounded by Friulian on all sides. Like finding 3 German villages between B-town and Columbus.</div>
+      <div class="lang-change">
+        <span class="lang-tag german">Plodarisch</span>
+        <span class="lang-tag german">Saurano</span>
+        <span class="lang-tag german">Timavese</span>
+      </div>
+    </div>
+
+    <div class="distance-card">
+      <div class="route">Cividale → Natisone Valleys</div>
+      <div class="km">15 km <small>/ 9 mi</small></div>
+      <div class="equiv">≈ <strong>IU campus → Lake Monroe</strong></div>
+      <div class="equiv">Cross from Friulian-speaking Cividale into Slovenian-dialect valleys. Like driving to the lake and finding everyone speaking a different language.</div>
+      <div class="lang-change">
+        <span class="lang-tag friulian">Friulian</span>
+        <span class="lang-tag slovenian">Natisone Slov.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= LANGUAGE PROFILES ======= -->
+<section class="section">
+  <h2 class="section-title">The Languages of FVG</h2>
+  <p class="section-sub">
+    Three language families — Romance, Slavic, and Germanic — coexist in a space smaller than most U.S. counties combined.
+  </p>
+
+  <div class="lang-cards">
+
+    <div class="lang-card" data-family="romance">
+      <h4>Friulian (Furlan)</h4>
+      <div class="family-tag">Rhaeto-Romance</div>
+      <div class="speakers">~600,000 speakers · 50% of the region</div>
+      <p>A Rhaeto-Romance language — closer to French and Romansh than to Italian. The second-largest recognized minority language in Italy after Sardinian. Spoken across most of the provinces of Udine, Pordenone, and Gorizia with distinct Carnic, Central, Western, and Eastern dialects.</p>
+      <div class="example">"Cemût staiso?"<span class="translation">"How are you?" (Central Friulian)</span></div>
+    </div>
+
+    <div class="lang-card" data-family="romance">
+      <h4>Triestine (Triestin)</h4>
+      <div class="family-tag">Venetian · Romance</div>
+      <div class="speakers">Dominant dialect of Trieste</div>
+      <p>A Venetian-based dialect that replaced the now-extinct Tergestine (a Rhaeto-Romance variety) by the 1800s. Enriched with German, Slovenian, Greek, and Serbo-Croatian loanwords from centuries as the Habsburg Empire's main port.</p>
+      <div class="example">"Come xe?"<span class="translation">"How are you?" / "What's going on?" (Triestine)</span></div>
+    </div>
+
+    <div class="lang-card" data-family="slavic">
+      <h4>Slovenian</h4>
+      <div class="family-tag">South Slavic</div>
+      <div class="speakers">~50,000 speakers in FVG</div>
+      <p>Spoken in the provinces of Gorizia, Trieste, and Udine. Protected by Italian law with rights to education and administration. Includes multiple dialects: Karst, Inner Carniolan, and the highly distinctive varieties of the Natisone, Torre, and Resia valleys.</p>
+      <div class="example">"Kako se imate?"<span class="translation">"How are you?" (Slovenian)</span></div>
+    </div>
+
+    <div class="lang-card" data-family="slavic">
+      <h4>Resian (Resiano)</h4>
+      <div class="family-tag">Archaic Slavic</div>
+      <div class="speakers">~1,000 speakers · Val Resia</div>
+      <p>So distinct from standard Slovenian that some linguists once classified it as a separate language. Isolated in the Val Resia since the early Middle Ages, it preserves archaic features lost in all neighboring Slavic varieties. UNESCO-classified as endangered.</p>
+      <div class="example">"Kako se mate?"<span class="translation">"How are you?" (Resian)</span></div>
+    </div>
+
+    <div class="lang-card" data-family="germanic">
+      <h4>Saurano (Zahrar Sproche)</h4>
+      <div class="family-tag">South Bavarian · Germanic</div>
+      <div class="speakers">~200 speakers · Sauris (1,300m)</div>
+      <p>A medieval South Bavarian dialect brought by Tyrolean colonists in the 1200s. The community is trilingual: Saurano + Italian + Carnic Friulian. Recently developed a written form — now used in WhatsApp messages.</p>
+      <div class="example">"Bia geat's?"<span class="translation">"How's it going?" (Saurano)</span></div>
+    </div>
+
+    <div class="lang-card" data-family="germanic">
+      <h4>Carinthian German</h4>
+      <div class="family-tag">Bavarian · Germanic</div>
+      <div class="speakers">~5,000 speakers · Val Canale</div>
+      <p>Spoken in Tarvisio and Pontebba near the Austrian border. Unlike the isolated "language islands" of the Carnic Alps, this is a continuation of the Carinthian dialect area across the border. Legacy of centuries under Habsburg rule.</p>
+      <div class="example">"Wia geht's?"<span class="translation">"How's it going?" (Carinthian)</span></div>
+    </div>
+
+    <div class="lang-card" data-family="romance">
+      <h4>Bisiacco & Gradese</h4>
+      <div class="family-tag">Venetian · Romance</div>
+      <div class="speakers">Monfalcone & Grado areas</div>
+      <p>Two more Venetian-rooted dialects. Bisiacco is spoken in the Bisiacaria around Monfalcone with a strong Friulian substrate. Gradese belongs to the lagoon town of Grado, historically tied to Venice and Aquileia rather than the Friulian interior.</p>
+      <div class="example">"Come xétu?"<span class="translation">"How are you?" (Bisiacco/Gradese)</span></div>
+    </div>
+
+    <div class="lang-card" data-family="germanic">
+      <h4>Plodarisch & Timavese</h4>
+      <div class="family-tag">South Bavarian · Germanic</div>
+      <div class="speakers">~1,700 combined · Sappada & Timau</div>
+      <p>Two more medieval Bavarian "language islands" in the Carnic Alps. Sappada borrows neologisms from German (kòòrn for "truck"), while Timau borrows from Italian (kamion). Each village evolved its own miniature language in isolation.</p>
+      <div class="example">"Bia geat's dir?"<span class="translation">"How are you?" (Timavese)</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ======= TAKEAWAY ======= -->
+<section class="takeaway">
+  <h2>Drive from Bloomington to Indianapolis.<br>Now imagine crossing 4 languages on the way.</h2>
+  <p>
+    That's the reality of Friuli Venezia Giulia — a region where Romance, Slavic, and Germanic language families collide in less than 3,100 square miles. Three language families, 12+ distinct varieties, one small corner of Italy at the crossroads of Europe.
+  </p>
+</section>
+
+<footer>
+  IU Italian — Friuli Venezia Giulia Language Diversity Project · Data from ARLeF, AlpiLinK, PRIMIS &amp; regional census
+</footer>
+
+<script>
+// Tooltip logic
+const tooltip = document.getElementById('tooltip');
+const pins = document.querySelectorAll('.lang-pin');
+
+pins.forEach(pin => {
+  pin.addEventListener('mouseenter', (e) => {
+    const lang = pin.dataset.lang;
+    const family = pin.dataset.family;
+    const desc = pin.dataset.desc;
+    const example = pin.dataset.example;
+
+    tooltip.querySelector('.tt-name').textContent = lang;
+    tooltip.querySelector('.tt-family').textContent = family;
+    tooltip.querySelector('.tt-desc').textContent = desc + (example ? '\n\n"' + example + '"' : '');
+    tooltip.classList.add('show');
+  });
+
+  pin.addEventListener('mousemove', (e) => {
+    const x = e.clientX + 15;
+    const y = e.clientY - 10;
+    const rect = tooltip.getBoundingClientRect();
+    const maxX = window.innerWidth - rect.width - 20;
+    const maxY = window.innerHeight - rect.height - 20;
+    tooltip.style.left = Math.min(x, maxX) + 'px';
+    tooltip.style.top = Math.min(y, maxY) + 'px';
+  });
+
+  pin.addEventListener('mouseleave', () => {
+    tooltip.classList.remove('show');
+  });
+
+  // Touch support
+  pin.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    const lang = pin.dataset.lang;
+    const family = pin.dataset.family;
+    const desc = pin.dataset.desc;
+
+    tooltip.querySelector('.tt-name').textContent = lang;
+    tooltip.querySelector('.tt-family').textContent = family;
+    tooltip.querySelector('.tt-desc').textContent = desc;
+    tooltip.classList.add('show');
+
+    const touch = e.touches[0];
+    tooltip.style.left = Math.min(touch.clientX + 10, window.innerWidth - 280) + 'px';
+    tooltip.style.top = Math.max(touch.clientY - 120, 10) + 'px';
+
+    setTimeout(() => tooltip.classList.remove('show'), 3000);
+  });
+});
+
+// Close tooltip on body touch
+document.body.addEventListener('touchstart', (e) => {
+  if (!e.target.closest('.lang-pin')) {
+    tooltip.classList.remove('show');
+  }
+});
+</script>
+</body>
+</html>
