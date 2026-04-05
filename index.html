@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Friuli Venezia Giulia — Language Diversity Explorer</title>
+<title>Friuli Venezia Giulia — Esploratore della diversità linguistica</title>
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -207,10 +207,26 @@ body {
 /* ---- LANGUAGE PINS ---- */
 .lang-pin {
   cursor: pointer;
-  transition: transform 0.2s;
 }
 
-.lang-pin:hover { transform: scale(1.25); }
+.lang-pin .hit-area {
+  fill: transparent;
+  stroke: none;
+}
+
+.lang-pin .pin-dot {
+  transition: r 0.15s ease, opacity 0.15s ease;
+}
+
+.lang-pin .pin-ring {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.lang-pin:hover .pin-ring,
+.lang-pin.active .pin-ring {
+  opacity: 1;
+}
 
 /* ---- TOOLTIP ---- */
 .tooltip {
@@ -483,33 +499,33 @@ footer a { color: var(--sea); text-decoration: none; }
 <section class="hero" id="hero">
   <div class="hero-content">
     <h1>
-      <span>Language Diversity in</span>
+      <span>La diversità linguistica del</span>
       Friuli Venezia Giulia
     </h1>
     <p class="hero-sub">
-      A region the size of central Indiana — with more linguistic diversity than most European countries.
-      Explore how languages shift every few miles, using familiar Hoosier distances for scale.
+      Una regione grande quanto l'Indiana centrale — con più diversità linguistica della maggior parte dei paesi europei.
+      Scopri come cambiano le lingue ogni pochi chilometri, usando distanze familiari dell'Indiana come riferimento.
     </p>
     <div class="hero-stats">
       <div class="hero-stat">
         <div class="num">12+</div>
-        <div class="label">Languages & Dialects</div>
+        <div class="label">Lingue e dialetti</div>
       </div>
       <div class="hero-stat">
         <div class="num">~3,060</div>
-        <div class="label">sq mi (≈ Indiana's 6th)</div>
+        <div class="label">mi² (≈ la 6ª più piccola)</div>
       </div>
       <div class="hero-stat">
         <div class="num">1.2M</div>
-        <div class="label">People</div>
+        <div class="label">Abitanti</div>
       </div>
       <div class="hero-stat">
         <div class="num">3</div>
-        <div class="label">Language Families</div>
+        <div class="label">Famiglie linguistiche</div>
       </div>
     </div>
     <div class="scroll-cue" onclick="document.getElementById('maps').scrollIntoView({behavior:'smooth'})">
-      Scroll to explore
+      Scorri per esplorare
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
     </div>
   </div>
@@ -517,18 +533,18 @@ footer a { color: var(--sea); text-decoration: none; }
 
 <!-- ======= SIDE-BY-SIDE MAPS ======= -->
 <section class="section" id="maps">
-  <h2 class="section-title">Two Regions, Side by Side</h2>
+  <h2 class="section-title">Due regioni, fianco a fianco</h2>
   <p class="section-sub">
-    Friuli Venezia Giulia is roughly the same area as central Indiana — from Bloomington to Indy to Terre Haute.
-    But while Hoosiers share English, FVG packs 12+ distinct languages into that same footprint.
+    Il Friuli Venezia Giulia ha più o meno la stessa superficie dell'Indiana centrale — da Bloomington a Indianapolis a Terre Haute.
+    Ma mentre gli abitanti dell'Indiana condividono l'inglese, il FVG racchiude 12+ lingue diverse nello stesso spazio.
   </p>
 
   <div class="legend">
-    <div class="legend-item"><div class="legend-dot" style="background:var(--friulian)"></div> Friulian / Rhaeto-Romance</div>
-    <div class="legend-item"><div class="legend-dot" style="background:var(--venetian)"></div> Venetian dialects</div>
-    <div class="legend-item"><div class="legend-dot" style="background:var(--slovenian)"></div> Slavic / Slovenian</div>
-    <div class="legend-item"><div class="legend-dot" style="background:var(--german)"></div> Germanic</div>
-    <div class="legend-item"><div class="legend-dot" style="background:var(--italian)"></div> Standard Italian</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--friulian)"></div> Friulano / Retoromanza</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--venetian)"></div> Dialetti veneti</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--slovenian)"></div> Slavo / Sloveno</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--german)"></div> Germanico</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--italian)"></div> Italiano standard</div>
   </div>
 
   <div class="maps-wrapper">
@@ -553,9 +569,9 @@ footer a { color: var(--sea); text-decoration: none; }
           </defs>
           <!-- Background land tint -->
           <rect width="500" height="375" fill="#e2e0d8" rx="0"/>
-          <!-- Adriatic Sea (south) -->
+          <!-- Mare Adriatico (south) -->
           <path d="M0,300 Q120,320 250,345 Q380,365 500,350 L500,375 L0,375 Z" fill="#d4e1ea" opacity="0.7"/>
-          <text x="180" y="365" fill="#a0b8cc" font-size="10" font-family="EB Garamond, serif" font-style="italic" text-anchor="middle">Adriatic Sea</text>
+          <text x="180" y="365" fill="#a0b8cc" font-size="10" font-family="EB Garamond, serif" font-style="italic" text-anchor="middle">Mare Adriatico</text>
           <!-- Slovenia shading -->
           <rect x="462" y="0" width="38" height="375" fill="#d8ddd4" opacity="0.4"/>
 
@@ -598,64 +614,64 @@ footer a { color: var(--sea); text-decoration: none; }
 
           <!-- ====== LANGUAGE PINS (geo-located from real lat/lng) ====== -->
           <!-- Friulian varieties -->
-          <g class="lang-pin" data-lang="Central Friulian" data-family="Rhaeto-Romance" data-desc="The main variety, centered around Udine. ~420,000 regular speakers. Basis for the literary koiné standardized in 1996." data-example="Cemût staiso? — How are you?">
-            <circle cx="290" cy="206" r="8" fill="var(--friulian)" opacity="0.9"/><circle cx="290" cy="206" r="3" fill="#fff"/>
+          <g class="lang-pin" data-lang="Friulano centrale" data-family="Retoromanza" data-desc="La varietà principale, centrata attorno a Udine. ~420.000 parlanti regolari. Base della koiné letteraria standardizzata nel 1996." data-example="Cemût staiso? — Come stai?">
+            <circle class="hit-area" cx="290" cy="206" r="18"/><circle class="pin-ring" cx="290" cy="206" r="12.0" fill="none" stroke="var(--friulian)" stroke-width="2" opacity="0.4"/><circle class="pin-dot" cx="290" cy="206" r="8" fill="var(--friulian)" opacity="0.9"/><circle cx="290" cy="206" r="3" fill="#fff"/>
           </g>
-          <g class="lang-pin" data-lang="Western Friulian" data-family="Rhaeto-Romance" data-desc="Spoken around Pordenone. Shows stronger Venetian influence than the central variety." data-example="Cement statu? — How are you?">
-            <circle cx="128" cy="241" r="7" fill="var(--friulian)" opacity="0.8"/><circle cx="128" cy="241" r="2.5" fill="#fff"/>
+          <g class="lang-pin" data-lang="Friulano occidentale" data-family="Retoromanza" data-desc="Parlato attorno a Pordenone. Mostra un'influenza veneta più forte rispetto alla varietà centrale." data-example="Cement statu? — Come stai?">
+            <circle class="hit-area" cx="128" cy="241" r="18"/><circle class="pin-ring" cx="128" cy="241" r="11.0" fill="none" stroke="var(--friulian)" stroke-width="2" opacity="0.4"/><circle class="pin-dot" cx="128" cy="241" r="7" fill="var(--friulian)" opacity="0.8"/><circle cx="128" cy="241" r="2.5" fill="#fff"/>
           </g>
-          <g class="lang-pin" data-lang="Carnic Friulian" data-family="Rhaeto-Romance" data-desc="Mountain variety spoken in Carnia (upper Tagliamento). More archaic features preserved due to Alpine isolation." data-example="Cjmût stâstu? — How are you?">
-            <circle cx="227" cy="103" r="7" fill="var(--friulian)" opacity="0.8"/><circle cx="227" cy="103" r="2.5" fill="#fff"/>
+          <g class="lang-pin" data-lang="Friulano carnico" data-family="Retoromanza" data-desc="Varietà montana parlata in Carnia (alto Tagliamento). Caratteristiche più arcaiche conservate grazie all'isolamento alpino." data-example="Cjmût stâstu? — Come stai?">
+            <circle class="hit-area" cx="227" cy="103" r="18"/><circle class="pin-ring" cx="227" cy="103" r="11.0" fill="none" stroke="var(--friulian)" stroke-width="2" opacity="0.4"/><circle class="pin-dot" cx="227" cy="103" r="7" fill="var(--friulian)" opacity="0.8"/><circle cx="227" cy="103" r="2.5" fill="#fff"/>
           </g>
-          <g class="lang-pin" data-lang="Eastern Friulian" data-family="Rhaeto-Romance" data-desc="Spoken around Gorizia. Influenced by Slovenian contact. Distinct phonology from central varieties." data-example="Cemùt stâstu? — How are you?">
-            <circle cx="366" cy="247" r="7" fill="var(--friulian)" opacity="0.8"/><circle cx="366" cy="247" r="2.5" fill="#fff"/>
+          <g class="lang-pin" data-lang="Friulano orientale" data-family="Retoromanza" data-desc="Parlato attorno a Gorizia. Influenzato dal contatto con lo sloveno. Fonologia distinta dalle varietà centrali." data-example="Cemùt stâstu? — Come stai?">
+            <circle class="hit-area" cx="366" cy="247" r="18"/><circle class="pin-ring" cx="366" cy="247" r="11.0" fill="none" stroke="var(--friulian)" stroke-width="2" opacity="0.4"/><circle class="pin-dot" cx="366" cy="247" r="7" fill="var(--friulian)" opacity="0.8"/><circle cx="366" cy="247" r="2.5" fill="#fff"/>
           </g>
 
           <!-- Slovenian varieties -->
-          <g class="lang-pin" data-lang="Slovenian (Gorizia/Trieste)" data-family="Slavic" data-desc="Spoken in Collio hills and across the Karst into Trieste. ~50,000 speakers in FVG. Protected by national law." data-example="Kako se imate? — How are you?">
-            <circle cx="423" cy="266" r="8" fill="var(--slovenian)" opacity="0.9"/><circle cx="423" cy="266" r="3" fill="#fff"/>
+          <g class="lang-pin" data-lang="Sloveno (Gorizia/Trieste)" data-family="Slavo" data-desc="Parlato sulle colline del Collio e attraverso il Carso fino a Trieste. ~50.000 parlanti in FVG. Protetto dalla legge nazionale." data-example="Kako se imate? — Come stai?">
+            <circle class="hit-area" cx="423" cy="266" r="18"/><circle class="pin-ring" cx="423" cy="266" r="12.0" fill="none" stroke="var(--slovenian)" stroke-width="2" opacity="0.4"/><circle class="pin-dot" cx="423" cy="266" r="8" fill="var(--slovenian)" opacity="0.9"/><circle cx="423" cy="266" r="3" fill="#fff"/>
           </g>
-          <g class="lang-pin" data-lang="Resian (Resiano)" data-family="Slavic" data-desc="An archaic Slovenian dialect in Val Resia, so distinct some linguists once classified it separately. ~1,000 speakers. UNESCO endangered." data-example="Kako se mate? — How are you?">
-            <circle cx="313" cy="109" r="7" fill="var(--slovenian)" opacity="0.85"/><circle cx="313" cy="109" r="2.5" fill="#fff"/>
+          <g class="lang-pin" data-lang="Resiano" data-family="Slavo" data-desc="Un dialetto sloveno arcaico nella Val Resia, così distinto che alcuni linguisti lo classificavano come lingua separata. ~1.000 parlanti. In pericolo secondo l'UNESCO." data-example="Kako se mate? — Come stai?">
+            <circle class="hit-area" cx="313" cy="109" r="18"/><circle class="pin-ring" cx="313" cy="109" r="11.0" fill="none" stroke="var(--slovenian)" stroke-width="2" opacity="0.4"/><circle class="pin-dot" cx="313" cy="109" r="7" fill="var(--slovenian)" opacity="0.85"/><circle cx="313" cy="109" r="2.5" fill="#fff"/>
           </g>
-          <g class="lang-pin" data-lang="Natisone Valley Slovenian" data-family="Slavic" data-desc="Dialects of the Valli del Natisone east of Cividale. Distinct from standard Slovenian, with Friulian admixture." data-example="Kakuo se imáte?">
-            <circle cx="361" cy="181" r="6" fill="var(--slovenian)" opacity="0.8"/><circle cx="361" cy="181" r="2" fill="#fff"/>
+          <g class="lang-pin" data-lang="Sloveno delle Valli del Natisone" data-family="Slavo" data-desc="Dialetti delle Valli del Natisone a est di Cividale. Distinti dallo sloveno standard, con influenze friulane." data-example="Kakuo se imáte?">
+            <circle class="hit-area" cx="361" cy="181" r="18"/><circle class="pin-ring" cx="361" cy="181" r="10.0" fill="none" stroke="var(--slovenian)" stroke-width="2" opacity="0.4"/><circle class="pin-dot" cx="361" cy="181" r="6" fill="var(--slovenian)" opacity="0.8"/><circle cx="361" cy="181" r="2" fill="#fff"/>
           </g>
-          <g class="lang-pin" data-lang="Torre Valley Slovenian" data-family="Slavic" data-desc="Upper Torre Valley dialect north of Tarcento. Another archaic Slovenian variety with unique features." data-example="">
-            <circle cx="338" cy="150" r="6" fill="var(--slovenian)" opacity="0.75"/><circle cx="338" cy="150" r="2" fill="#fff"/>
-          </g>
-
-          <!-- Germanic language islands -->
-          <g class="lang-pin" data-lang="Saurano (Zahrar Sproche)" data-family="Germanic" data-desc="Medieval South Bavarian dialect in Sauris (1,300m). ~200 speakers. Settled by Tyrolean colonists in the 1200s. Trilingual community." data-example="Bia geat's? — How's it going?">
-            <circle cx="142" cy="84" r="7" fill="var(--german)" opacity="0.9"/><circle cx="142" cy="84" r="2.5" fill="#fff"/>
-          </g>
-          <g class="lang-pin" data-lang="Timavese (Tsjmbrischt)" data-family="Germanic" data-desc="South Bavarian dialect of Timau/Tischelwang. ~400 speakers. German vocabulary diverges from Saurano." data-example="Bia geat's dir? — How are you?">
-            <circle cx="230" cy="56" r="6" fill="var(--german)" opacity="0.85"/><circle cx="230" cy="56" r="2" fill="#fff"/>
-          </g>
-          <g class="lang-pin" data-lang="Plodarisch (Sappada)" data-family="Germanic" data-desc="South Bavarian dialect of Sappada/Plodn. ~1,300 residents. Uses German-modeled neologisms unlike neighbors." data-example="Bia geat's? — How's it going?">
-            <circle cx="136" cy="50" r="6" fill="var(--german)" opacity="0.85"/><circle cx="136" cy="50" r="2" fill="#fff"/>
-          </g>
-          <g class="lang-pin" data-lang="Carinthian German (Val Canale)" data-family="Germanic" data-desc="Carinthian dialect in Tarvisio and Pontebba, near Austrian border. ~5,000 speakers. Former Habsburg territory." data-example="Wia geht's? — How's it going?">
-            <circle cx="389" cy="68" r="7" fill="var(--german)" opacity="0.9"/><circle cx="389" cy="68" r="2.5" fill="#fff"/>
+          <g class="lang-pin" data-lang="Sloveno della Val Torre" data-family="Slavo" data-desc="Dialetto dell'alta Val Torre a nord di Tarcento. Un'altra varietà slovena arcaica con caratteristiche uniche." data-example="">
+            <circle class="hit-area" cx="338" cy="150" r="18"/><circle class="pin-ring" cx="338" cy="150" r="10.0" fill="none" stroke="var(--slovenian)" stroke-width="2" opacity="0.4"/><circle class="pin-dot" cx="338" cy="150" r="6" fill="var(--slovenian)" opacity="0.75"/><circle cx="338" cy="150" r="2" fill="#fff"/>
           </g>
 
-          <!-- Venetian dialects -->
-          <g class="lang-pin" data-lang="Triestine (Triestin)" data-family="Venetian" data-desc="Venetian-based dialect with German, Slovenian, and Greek loanwords. Replaced the extinct Tergestine by the 1800s." data-example="Come xe? — How are you?">
-            <circle cx="446" cy="338" r="8" fill="var(--venetian)" opacity="0.9"/><circle cx="446" cy="338" r="3" fill="#fff"/>
+          <!-- Germanico language islands -->
+          <g class="lang-pin" data-lang="Saurano (Zahrar Sproche)" data-family="Germanico" data-desc="Medieval South Bavarian dialect in Sauris (1,300m). ~200 speakers. Settled by Tyrolean colonists in the 1200s. Trilingual community." data-example="Bia geat's? — Come va?">
+            <circle class="hit-area" cx="142" cy="84" r="18"/><circle class="pin-ring" cx="142" cy="84" r="11.0" fill="none" stroke="var(--german)" stroke-width="2" opacity="0.4"/><circle class="pin-dot" cx="142" cy="84" r="7" fill="var(--german)" opacity="0.9"/><circle cx="142" cy="84" r="2.5" fill="#fff"/>
           </g>
-          <g class="lang-pin" data-lang="Bisiacco" data-family="Venetian" data-desc="Venetian dialect of Monfalcone/Bisiacaria. Influenced by Friulian substrate. Distinct from both Triestine and mainland Venetian." data-example="Come xétu? — How are you?">
-            <circle cx="375" cy="294" r="6" fill="var(--venetian)" opacity="0.8"/><circle cx="375" cy="294" r="2" fill="#fff"/>
+          <g class="lang-pin" data-lang="Timavese (Tsjmbrischt)" data-family="Germanico" data-desc="South Bavarian dialect of Timau/Tischelwang. ~400 speakers. German vocabulary diverges from Saurano." data-example="Bia geat's dir? — Come stai?">
+            <circle class="hit-area" cx="230" cy="56" r="18"/><circle class="pin-ring" cx="230" cy="56" r="10.0" fill="none" stroke="var(--german)" stroke-width="2" opacity="0.4"/><circle class="pin-dot" cx="230" cy="56" r="6" fill="var(--german)" opacity="0.85"/><circle cx="230" cy="56" r="2" fill="#fff"/>
           </g>
-          <g class="lang-pin" data-lang="Gradese" data-family="Venetian" data-desc="Venetian dialect of Grado lagoon. Historic link to Venice and Aquileia rather than Friulian hinterland." data-example="Come xétu? — How are you?">
-            <circle cx="335" cy="329" r="6" fill="var(--venetian)" opacity="0.8"/><circle cx="335" cy="329" r="2" fill="#fff"/>
+          <g class="lang-pin" data-lang="Plodarisch (Sappada)" data-family="Germanico" data-desc="South Bavarian dialect of Sappada/Plodn. ~1,300 residents. Uses German-modeled neologisms unlike neighbors." data-example="Bia geat's? — Come va?">
+            <circle class="hit-area" cx="136" cy="50" r="18"/><circle class="pin-ring" cx="136" cy="50" r="10.0" fill="none" stroke="var(--german)" stroke-width="2" opacity="0.4"/><circle class="pin-dot" cx="136" cy="50" r="6" fill="var(--german)" opacity="0.85"/><circle cx="136" cy="50" r="2" fill="#fff"/>
           </g>
-          <g class="lang-pin" data-lang="Pordenonese Venetian" data-family="Venetian" data-desc="Venetian-influenced speech in western Pordenone, reflecting proximity to Veneto." data-example="">
-            <circle cx="83" cy="260" r="6" fill="var(--venetian)" opacity="0.75"/><circle cx="83" cy="260" r="2" fill="#fff"/>
+          <g class="lang-pin" data-lang="Carinthian German (Val Canale)" data-family="Germanico" data-desc="Carinthian dialect in Tarvisio and Pontebba, near Austrian border. ~5,000 speakers. Former Habsburg territory." data-example="Wia geht's? — Come va?">
+            <circle class="hit-area" cx="389" cy="68" r="18"/><circle class="pin-ring" cx="389" cy="68" r="11.0" fill="none" stroke="var(--german)" stroke-width="2" opacity="0.4"/><circle class="pin-dot" cx="389" cy="68" r="7" fill="var(--german)" opacity="0.9"/><circle cx="389" cy="68" r="2.5" fill="#fff"/>
+          </g>
+
+          <!-- Dialetti veneti -->
+          <g class="lang-pin" data-lang="Triestino (Triestin)" data-family="Veneto" data-desc="Dialetto di base veneta con prestiti dal tedesco, sloveno e greco. Ha sostituito il tergestino estinto entro il 1800." data-example="Come xe? — Come stai?">
+            <circle class="hit-area" cx="446" cy="338" r="18"/><circle class="pin-ring" cx="446" cy="338" r="12.0" fill="none" stroke="var(--venetian)" stroke-width="2" opacity="0.4"/><circle class="pin-dot" cx="446" cy="338" r="8" fill="var(--venetian)" opacity="0.9"/><circle cx="446" cy="338" r="3" fill="#fff"/>
+          </g>
+          <g class="lang-pin" data-lang="Bisiacco" data-family="Veneto" data-desc="Dialetto veneto di Monfalcone/Bisiacaria. Influenzato dal substrato friulano. Distinto sia dal triestino che dal veneto continentale." data-example="Come xétu? — Come stai?">
+            <circle class="hit-area" cx="375" cy="294" r="18"/><circle class="pin-ring" cx="375" cy="294" r="10.0" fill="none" stroke="var(--venetian)" stroke-width="2" opacity="0.4"/><circle class="pin-dot" cx="375" cy="294" r="6" fill="var(--venetian)" opacity="0.8"/><circle cx="375" cy="294" r="2" fill="#fff"/>
+          </g>
+          <g class="lang-pin" data-lang="Gradese" data-family="Veneto" data-desc="Dialetto veneto della laguna di Grado. Legame storico con Venezia e Aquileia piuttosto che con l'entroterra friulano." data-example="Come xétu? — Come stai?">
+            <circle class="hit-area" cx="335" cy="329" r="18"/><circle class="pin-ring" cx="335" cy="329" r="10.0" fill="none" stroke="var(--venetian)" stroke-width="2" opacity="0.4"/><circle class="pin-dot" cx="335" cy="329" r="6" fill="var(--venetian)" opacity="0.8"/><circle cx="335" cy="329" r="2" fill="#fff"/>
+          </g>
+          <g class="lang-pin" data-lang="Veneto pordenonese" data-family="Veneto" data-desc="Parlata di influenza veneta nel Pordenonese occidentale, che riflette la vicinanza al Veneto." data-example="">
+            <circle class="hit-area" cx="83" cy="260" r="18"/><circle class="pin-ring" cx="83" cy="260" r="10.0" fill="none" stroke="var(--venetian)" stroke-width="2" opacity="0.4"/><circle class="pin-dot" cx="83" cy="260" r="6" fill="var(--venetian)" opacity="0.75"/><circle cx="83" cy="260" r="2" fill="#fff"/>
           </g>
 
           <!-- Standard Italian -->
-          <g class="lang-pin" data-lang="Standard Italian" data-family="National Language" data-desc="The official language. Dominant in cities, schools, media, bureaucracy. Everyone speaks it, but many are bilingual or trilingual." data-example="Come stai? — How are you?">
-            <circle cx="253" cy="282" r="7" fill="var(--italian)" opacity="0.8"/><circle cx="253" cy="282" r="2.5" fill="#fff"/>
+          <g class="lang-pin" data-lang="Italiano standard" data-family="Lingua nazionale" data-desc="La lingua ufficiale. Dominante nelle città, scuole, media e burocrazia. Tutti lo parlano, ma molti sono bilingui o trilingui." data-example="Come stai? — Come stai?">
+            <circle class="hit-area" cx="253" cy="282" r="18"/><circle class="pin-ring" cx="253" cy="282" r="11.0" fill="none" stroke="var(--italian)" stroke-width="2" opacity="0.4"/><circle class="pin-dot" cx="253" cy="282" r="7" fill="var(--italian)" opacity="0.8"/><circle cx="253" cy="282" r="2.5" fill="#fff"/>
           </g>
 
           <!-- Scale bar -->
@@ -671,7 +687,7 @@ footer a { color: var(--sea); text-decoration: none; }
     <div class="map-card">
       <div class="map-card-header">
         <span class="flag">🇺🇸</span>
-        <h3>Central Indiana (same scale)</h3>
+        <h3>Indiana centrale (stessa scala)</h3>
         <span class="area">~7,900 km²</span>
       </div>
       <div class="map-svg-container">
@@ -741,7 +757,7 @@ footer a { color: var(--sea); text-decoration: none; }
           <text x="130" cy="290" y="300" fill="var(--italian)" font-size="12" font-family="EB Garamond, serif" font-weight="700" text-anchor="middle" opacity="0.1">English</text>
 
           <!-- Annotation -->
-          <text x="250" y="355" fill="#8a9a78" font-size="10" font-family="EB Garamond, serif" font-style="italic" text-anchor="middle">One language across the same area</text>
+          <text x="250" y="355" fill="#8a9a78" font-size="10" font-family="EB Garamond, serif" font-style="italic" text-anchor="middle">Una sola lingua su tutta la stessa area</text>
 
           <!-- Scale bar -->
           <line x1="30" y1="345" x2="110" y2="345" stroke="#8a9a78" stroke-width="1.5"/>
@@ -756,9 +772,9 @@ footer a { color: var(--sea); text-decoration: none; }
 
 <!-- ======= DISTANCE COMPARISONS ======= -->
 <section class="distance-section">
-  <h2 class="section-title">Familiar Distances, Unfamiliar Diversity</h2>
+  <h2 class="section-title">Distanze familiari, diversità sorprendente</h2>
   <p class="section-sub">
-    Each of these FVG journeys is about the same distance as a Hoosier road trip you might know — but in FVG, you cross into an entirely different language.
+    Ognuno di questi viaggi in FVG ha circa la stessa distanza di un viaggio in auto che potresti fare in Indiana — ma in FVG, passi in una lingua completamente diversa.
   </p>
 
   <div class="distance-grid">
@@ -766,12 +782,12 @@ footer a { color: var(--sea); text-decoration: none; }
       <div class="route">Udine → Trieste</div>
       <div class="km">75 km <small>/ 47 mi</small></div>
       <div class="equiv">≈ <strong>Bloomington → Indianapolis</strong></div>
-      <div class="equiv">Start in Friulian, end in Triestine (Venetian) — passing through Italian and Slovenian zones.</div>
+      <div class="equiv">Si parte in friulano, si arriva in triestino (veneto) — passando per zone italiane e slovene.</div>
       <div class="lang-change">
-        <span class="lang-tag friulian">Friulian</span>
-        <span class="lang-tag italian">Italian</span>
-        <span class="lang-tag slovenian">Slovenian</span>
-        <span class="lang-tag venetian">Triestine</span>
+        <span class="lang-tag friulian">Friulano</span>
+        <span class="lang-tag italian">Italiano</span>
+        <span class="lang-tag slovenian">Sloveno</span>
+        <span class="lang-tag venetian">Triestino</span>
       </div>
     </div>
 
@@ -779,11 +795,11 @@ footer a { color: var(--sea); text-decoration: none; }
       <div class="route">Sauris → Tarvisio</div>
       <div class="km">65 km <small>/ 40 mi</small></div>
       <div class="equiv">≈ <strong>Bloomington → Columbus</strong></div>
-      <div class="equiv">From a medieval Bavarian village (200 speakers!) to a Carinthian German-speaking border town. Two distinct Germanic dialects.</div>
+<div class="equiv">Da un villaggio bavarese medievale (200 parlanti!) a una cittadina di confine carinziana di lingua tedesca. Due distinti dialetti germanici.</div>
       <div class="lang-change">
         <span class="lang-tag german">Saurano</span>
-        <span class="lang-tag friulian">Carnic Friulian</span>
-        <span class="lang-tag german">Carinthian</span>
+        <span class="lang-tag friulian">Friulano carnico</span>
+        <span class="lang-tag german">Carinziano</span>
       </div>
     </div>
 
@@ -791,12 +807,12 @@ footer a { color: var(--sea); text-decoration: none; }
       <div class="route">Trieste → Resia</div>
       <div class="km">140 km <small>/ 87 mi</small></div>
       <div class="equiv">≈ <strong>Bloomington → Terre Haute + back</strong></div>
-      <div class="equiv">From a Venetian-dialect port city to a valley where an archaic Slovenian so distinct it was once thought to be a separate language.</div>
+      <div class="equiv">Da una città portuale di dialetto veneto a una valle dove si parla uno sloveno arcaico così distinto che si pensava fosse una lingua separata.</div>
       <div class="lang-change">
-        <span class="lang-tag venetian">Triestine</span>
-        <span class="lang-tag italian">Italian</span>
-        <span class="lang-tag friulian">Friulian</span>
-        <span class="lang-tag slovenian">Resian</span>
+        <span class="lang-tag venetian">Triestino</span>
+        <span class="lang-tag italian">Italiano</span>
+        <span class="lang-tag friulian">Friulano</span>
+        <span class="lang-tag slovenian">Resiano</span>
       </div>
     </div>
 
@@ -804,11 +820,11 @@ footer a { color: var(--sea); text-decoration: none; }
       <div class="route">Pordenone → Grado</div>
       <div class="km">90 km <small>/ 56 mi</small></div>
       <div class="equiv">≈ <strong>Bloomington → Greencastle → Terre Haute</strong></div>
-      <div class="equiv">From Venetian-influenced western Friuli to the Adriatic lagoon, where Gradese (a Venetian dialect) links back to old Venice, not Friuli.</div>
+      <div class="equiv">Dal Friuli occidentale di influenza veneta alla laguna adriatica, dove il gradese (dialetto veneto) si lega all'antica Venezia, non al Friuli.</div>
       <div class="lang-change">
         <span class="lang-tag venetian">Pordenonese</span>
-        <span class="lang-tag friulian">W. Friulian</span>
-        <span class="lang-tag friulian">C. Friulian</span>
+        <span class="lang-tag friulian">Fri. occ.</span>
+        <span class="lang-tag friulian">Fri. centr.</span>
         <span class="lang-tag venetian">Gradese</span>
       </div>
     </div>
@@ -817,7 +833,7 @@ footer a { color: var(--sea); text-decoration: none; }
       <div class="route">Sappada → Sauris → Timau</div>
       <div class="km">~50 km <small>/ 31 mi total</small></div>
       <div class="equiv">≈ <strong>Bloomington → Nashville → Columbus</strong></div>
-      <div class="equiv">Three tiny German "language islands" — each with its own medieval Bavarian dialect, surrounded by Friulian on all sides. Like finding 3 German villages between B-town and Columbus.</div>
+      <div class="equiv">Tre piccole "isole linguistiche" tedesche — ognuna con il proprio dialetto bavarese medievale, circondate dal friulano. Come trovare 3 villaggi tedeschi tra Bloomington e Columbus.</div>
       <div class="lang-change">
         <span class="lang-tag german">Plodarisch</span>
         <span class="lang-tag german">Saurano</span>
@@ -829,10 +845,10 @@ footer a { color: var(--sea); text-decoration: none; }
       <div class="route">Cividale → Natisone Valleys</div>
       <div class="km">15 km <small>/ 9 mi</small></div>
       <div class="equiv">≈ <strong>IU campus → Lake Monroe</strong></div>
-      <div class="equiv">Cross from Friulian-speaking Cividale into Slovenian-dialect valleys. Like driving to the lake and finding everyone speaking a different language.</div>
+      <div class="equiv">Si passa da Cividale friulanofona alle valli di dialetto sloveno. Come guidare fino al lago e trovare tutti che parlano un'altra lingua.</div>
       <div class="lang-change">
-        <span class="lang-tag friulian">Friulian</span>
-        <span class="lang-tag slovenian">Natisone Slov.</span>
+        <span class="lang-tag friulian">Friulano</span>
+        <span class="lang-tag slovenian">Slov. Natisone</span>
       </div>
     </div>
   </div>
@@ -840,75 +856,74 @@ footer a { color: var(--sea); text-decoration: none; }
 
 <!-- ======= LANGUAGE PROFILES ======= -->
 <section class="section">
-  <h2 class="section-title">The Languages of FVG</h2>
+  <h2 class="section-title">Le lingue del FVG</h2>
   <p class="section-sub">
-    Three language families — Romance, Slavic, and Germanic — coexist in a space smaller than most U.S. counties combined.
+   Tre famiglie linguistiche — romanze, slave e germaniche — coesistono in uno spazio più piccolo della maggior parte delle contee degli Stati Uniti messe insieme.
   </p>
 
   <div class="lang-cards">
 
     <div class="lang-card" data-family="romance">
-      <h4>Friulian (Furlan)</h4>
-      <div class="family-tag">Rhaeto-Romance</div>
-      <div class="speakers">~600,000 speakers · 50% of the region</div>
-      <p>A Rhaeto-Romance language — closer to French and Romansh than to Italian. The second-largest recognized minority language in Italy after Sardinian. Spoken across most of the provinces of Udine, Pordenone, and Gorizia with distinct Carnic, Central, Western, and Eastern dialects.</p>
-      <div class="example">"Cemût staiso?"<span class="translation">"How are you?" (Central Friulian)</span></div>
+      <h4>Friulano (Furlan)</h4>
+      <div class="family-tag">Retoromanza</div>
+      <div class="speakers">~600.000 parlanti · 50% della regione</div>
+      <p>Una lingua retoromanza — più vicina al francese e al romancio che all'italiano. La seconda lingua minoritaria riconosciuta più grande d'Italia dopo il sardo. Parlata nella maggior parte delle province di Udine, Pordenone e Gorizia con varietà carnica, centrale, occidentale e orientale.</p>
+      <div class="example">"Cemût staiso?"<span class="translation">"Come stai?" (Friulano centrale)</span></div>
     </div>
 
     <div class="lang-card" data-family="romance">
-      <h4>Triestine (Triestin)</h4>
-      <div class="family-tag">Venetian · Romance</div>
-      <div class="speakers">Dominant dialect of Trieste</div>
-      <p>A Venetian-based dialect that replaced the now-extinct Tergestine (a Rhaeto-Romance variety) by the 1800s. Enriched with German, Slovenian, Greek, and Serbo-Croatian loanwords from centuries as the Habsburg Empire's main port.</p>
-      <div class="example">"Come xe?"<span class="translation">"How are you?" / "What's going on?" (Triestine)</span></div>
+      <h4>Triestino (Triestin)</h4>
+      <div class="family-tag">Veneto · Romanza</div>
+      <div class="speakers">Dialetto dominante di Trieste</div>
+      <p>Un dialetto di base veneta che ha sostituito il tergestino ormai estinto (una varietà retoromanza) entro il 1800. Arricchito con prestiti dal tedesco, sloveno, greco e serbocroato grazie a secoli come porto principale dell'Impero asburgico.</p>
+      <div class="example">"Come xe?"<span class="translation">"Come stai?" / "Che succede?" (Triestino)</span></div>
     </div>
 
     <div class="lang-card" data-family="slavic">
-      <h4>Slovenian</h4>
-      <div class="family-tag">South Slavic</div>
-      <div class="speakers">~50,000 speakers in FVG</div>
-      <p>Spoken in the provinces of Gorizia, Trieste, and Udine. Protected by Italian law with rights to education and administration. Includes multiple dialects: Karst, Inner Carniolan, and the highly distinctive varieties of the Natisone, Torre, and Resia valleys.</p>
-      <div class="example">"Kako se imate?"<span class="translation">"How are you?" (Slovenian)</span></div>
+      <h4>Sloveno</h4>
+      <div class="family-tag">Slavo meridionale</div>
+      <div class="speakers">~50.000 parlanti in FVG</div>
+      <p>Parlato nelle province di Gorizia, Trieste e Udine. Protetto dalla legge italiana con diritti all'istruzione e all'amministrazione. Include diversi dialetti: carsico, carniolano interno, e le varietà molto distintive delle Valli del Natisone, del Torre e di Resia.</p>
+      <div class="example">"Kako se imate?"<span class="translation">"Come stai?" (Sloveno)</span></div>
     </div>
 
     <div class="lang-card" data-family="slavic">
-      <h4>Resian (Resiano)</h4>
-      <div class="family-tag">Archaic Slavic</div>
-      <div class="speakers">~1,000 speakers · Val Resia</div>
-      <p>So distinct from standard Slovenian that some linguists once classified it as a separate language. Isolated in the Val Resia since the early Middle Ages, it preserves archaic features lost in all neighboring Slavic varieties. UNESCO-classified as endangered.</p>
-      <div class="example">"Kako se mate?"<span class="translation">"How are you?" (Resian)</span></div>
+      <h4>Resiano</h4>
+      <div class="family-tag">Slavo arcaico</div>
+      <div class="speakers">~1.000 parlanti · Val Resia</div>
+      <p>Così distinto dallo sloveno standard che alcuni linguisti lo classificavano come lingua separata. Isolato nella Val Resia dall'alto Medioevo, conserva caratteristiche arcaiche perse in tutte le varietà slave vicine. Classificato dall'UNESCO come in pericolo.</p>
+      <div class="example">"Kako se mate?"<span class="translation">"Come stai?" (Resiano)</span></div>
     </div>
 
     <div class="lang-card" data-family="germanic">
       <h4>Saurano (Zahrar Sproche)</h4>
-      <div class="family-tag">South Bavarian · Germanic</div>
-      <div class="speakers">~200 speakers · Sauris (1,300m)</div>
-      <p>A medieval South Bavarian dialect brought by Tyrolean colonists in the 1200s. The community is trilingual: Saurano + Italian + Carnic Friulian. Recently developed a written form — now used in WhatsApp messages.</p>
-      <div class="example">"Bia geat's?"<span class="translation">"How's it going?" (Saurano)</span></div>
+      <div class="family-tag">South Bavarian · Germanico</div>
+      <div class="speakers">~200 parlanti · Sauris (1.300 m)</div>
+<p>Un dialetto sud-bavarese medievale portato da coloni tirolesi nel XIII secolo. La comunità è trilingue: saurano + italiano + friulano carnico. Ha sviluppato di recente una forma scritta — oggi utilizzata nei messaggi WhatsApp.</p>
+      <div class="example">"Bia geat's?"<span class="translation">"Come va?" (Saurano)</span></div>
     </div>
 
     <div class="lang-card" data-family="germanic">
       <h4>Carinthian German</h4>
-      <div class="family-tag">Bavarian · Germanic</div>
-      <div class="speakers">~5,000 speakers · Val Canale</div>
-      <p>Spoken in Tarvisio and Pontebba near the Austrian border. Unlike the isolated "language islands" of the Carnic Alps, this is a continuation of the Carinthian dialect area across the border. Legacy of centuries under Habsburg rule.</p>
-      <div class="example">"Wia geht's?"<span class="translation">"How's it going?" (Carinthian)</span></div>
+      <div class="family-tag">Bavarian · Germanico</div>
+      <div class="speakers">~5,000 parlanti · Val Canale</div>
+      <p>Parlato a Tarvisio e Pontebba vicino al confine austriaco. A differenza delle "isole linguistiche" isolate delle Alpi Carniche, è una continuazione dell'area dialettale carinziana oltre il confine. Eredità di secoli sotto il dominio asburgico.</p>
+      <div class="example">"Wia geht's?"<span class="translation">"Come va?" (Carinziano)</span></div>
     </div>
 
     <div class="lang-card" data-family="romance">
-      <h4>Bisiacco & Gradese</h4>
-      <div class="family-tag">Venetian · Romance</div>
-      <div class="speakers">Monfalcone & Grado areas</div>
-      <p>Two more Venetian-rooted dialects. Bisiacco is spoken in the Bisiacaria around Monfalcone with a strong Friulian substrate. Gradese belongs to the lagoon town of Grado, historically tied to Venice and Aquileia rather than the Friulian interior.</p>
-      <div class="example">"Come xétu?"<span class="translation">"How are you?" (Bisiacco/Gradese)</span></div>
+      <h4>Bisiacco e Gradese</h4>
+      <div class="family-tag">Veneto · Romanza</div>
+      <div class="speakers">Zone di Monfalcone e Grado</div>
+      <p>Due altri dialetti di radice veneta. Il bisiacco è parlato nella Bisiacaria attorno a Monfalcone con un forte substrato friulano. Il gradese appartiene alla città lagunare di Grado, storicamente legata a Venezia e Aquileia piuttosto che all'entroterra friulano.</p>
+      <div class="example">"Come xétu?"<span class="translation">"Come stai?" (Bisiacco/Gradese)</span></div>
     </div>
 
     <div class="lang-card" data-family="germanic">
       <h4>Plodarisch & Timavese</h4>
-      <div class="family-tag">South Bavarian · Germanic</div>
-      <div class="speakers">~1,700 combined · Sappada & Timau</div>
-      <p>Two more medieval Bavarian "language islands" in the Carnic Alps. Sappada borrows neologisms from German (kòòrn for "truck"), while Timau borrows from Italian (kamion). Each village evolved its own miniature language in isolation.</p>
-      <div class="example">"Bia geat's dir?"<span class="translation">"How are you?" (Timavese)</span></div>
+      <div class="family-tag">South Bavarian · Germanico</div>
+      <div class="speakers">~1,700 parlanti · Sappada & Timau</div>
+<p>Altre due “isole linguistiche” bavaresi medievali nelle Alpi Carniche. Sappada prende in prestito neologismi dal tedesco (kòòrn per “camion”), mentre Timau li prende dall’italiano (kamion). Ogni villaggio ha sviluppato la propria lingua in miniatura in isolamento.</p>      <div class="example">"Bia geat's dir?"<span class="translation">"Come stai?" (Timavese)</span></div>
     </div>
 
   </div>
@@ -916,14 +931,11 @@ footer a { color: var(--sea); text-decoration: none; }
 
 <!-- ======= TAKEAWAY ======= -->
 <section class="takeaway">
-  <h2>Drive from Bloomington to Indianapolis.<br>Now imagine crossing 4 languages on the way.</h2>
-  <p>
-    That's the reality of Friuli Venezia Giulia — a region where Romance, Slavic, and Germanic language families collide in less than 3,100 square miles. Three language families, 12+ distinct varieties, one small corner of Italy at the crossroads of Europe.
-  </p>
+  <h2>Guida da Bloomington a Indianapolis.<br>Ora immagina di attraversare 4 lingue lungo il percorso.</h2>
 </section>
 
 <footer>
-  IU Italian — Friuli Venezia Giulia Language Diversity Project · Data from ARLeF, AlpiLinK, PRIMIS &amp; regional census
+  IU Italiano — Progetto sulla diversità linguistica del Friuli Venezia Giulia · Dati da ARLeF, AlpiLinK, PRIMIS e censimento regionale
 </footer>
 
 <script>
@@ -931,58 +943,88 @@ footer a { color: var(--sea); text-decoration: none; }
 const tooltip = document.getElementById('tooltip');
 const pins = document.querySelectorAll('.lang-pin');
 
-pins.forEach(pin => {
-  pin.addEventListener('mouseenter', (e) => {
-    const lang = pin.dataset.lang;
-    const family = pin.dataset.family;
-    const desc = pin.dataset.desc;
-    const example = pin.dataset.example;
+let activePin = null;
 
-    tooltip.querySelector('.tt-name').textContent = lang;
-    tooltip.querySelector('.tt-family').textContent = family;
-    tooltip.querySelector('.tt-desc').textContent = desc + (example ? '\n\n"' + example + '"' : '');
-    tooltip.classList.add('show');
+function showTooltip(pin, clientX, clientY) {
+  const lang = pin.dataset.lang;
+  const family = pin.dataset.family;
+  const desc = pin.dataset.desc;
+  const example = pin.dataset.example;
+
+  tooltip.querySelector('.tt-name').textContent = lang;
+  tooltip.querySelector('.tt-family').textContent = family;
+  tooltip.querySelector('.tt-desc').textContent = desc + (example ? ' — "' + example + '"' : '');
+  tooltip.classList.add('show');
+
+  // Position tooltip
+  requestAnimationFrame(() => {
+    const rect = tooltip.getBoundingClientRect();
+    let x = clientX + 18;
+    let y = clientY - 15;
+    if (x + rect.width > window.innerWidth - 15) x = clientX - rect.width - 15;
+    if (y + rect.height > window.innerHeight - 15) y = clientY - rect.height - 10;
+    if (y < 10) y = 10;
+    tooltip.style.left = x + 'px';
+    tooltip.style.top = y + 'px';
+  });
+}
+
+function hideTooltip() {
+  tooltip.classList.remove('show');
+  if (activePin) {
+    activePin.classList.remove('active');
+    activePin = null;
+  }
+}
+
+pins.forEach(pin => {
+  // Desktop: hover via the invisible hit-area circle
+  pin.addEventListener('mouseenter', (e) => {
+    pin.classList.add('active');
+    activePin = pin;
+    showTooltip(pin, e.clientX, e.clientY);
   });
 
   pin.addEventListener('mousemove', (e) => {
-    const x = e.clientX + 15;
-    const y = e.clientY - 10;
-    const rect = tooltip.getBoundingClientRect();
-    const maxX = window.innerWidth - rect.width - 20;
-    const maxY = window.innerHeight - rect.height - 20;
-    tooltip.style.left = Math.min(x, maxX) + 'px';
-    tooltip.style.top = Math.min(y, maxY) + 'px';
+    if (pin.classList.contains('active')) {
+      showTooltip(pin, e.clientX, e.clientY);
+    }
   });
 
   pin.addEventListener('mouseleave', () => {
+    pin.classList.remove('active');
+    if (activePin === pin) activePin = null;
     tooltip.classList.remove('show');
   });
 
-  // Touch support
+  // Mobile: tap to toggle
   pin.addEventListener('touchstart', (e) => {
     e.preventDefault();
-    const lang = pin.dataset.lang;
-    const family = pin.dataset.family;
-    const desc = pin.dataset.desc;
+    e.stopPropagation();
 
-    tooltip.querySelector('.tt-name').textContent = lang;
-    tooltip.querySelector('.tt-family').textContent = family;
-    tooltip.querySelector('.tt-desc').textContent = desc;
-    tooltip.classList.add('show');
+    // If tapping the same pin, close it
+    if (activePin === pin) {
+      hideTooltip();
+      return;
+    }
+
+    // Close previous
+    if (activePin) activePin.classList.remove('active');
+
+    activePin = pin;
+    pin.classList.add('active');
 
     const touch = e.touches[0];
-    tooltip.style.left = Math.min(touch.clientX + 10, window.innerWidth - 280) + 'px';
-    tooltip.style.top = Math.max(touch.clientY - 120, 10) + 'px';
-
-    setTimeout(() => tooltip.classList.remove('show'), 3000);
+    showTooltip(pin, touch.clientX, touch.clientY);
   });
 });
 
-// Close tooltip on body touch
-document.body.addEventListener('touchstart', (e) => {
-  if (!e.target.closest('.lang-pin')) {
-    tooltip.classList.remove('show');
-  }
+// Close tooltip when tapping elsewhere
+document.addEventListener('touchstart', (e) => {
+  if (!e.target.closest('.lang-pin')) hideTooltip();
+});
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.lang-pin') && !e.target.closest('.tooltip')) hideTooltip();
 });
 </script>
 </body>
